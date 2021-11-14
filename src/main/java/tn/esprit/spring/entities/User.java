@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 public class User implements Serializable {
 	
 	//Testing update on git the second time now
-	//Testing again in github
+	//Testing again in github again
 	
 	private static final long serialVersionUID = 1L;
 
