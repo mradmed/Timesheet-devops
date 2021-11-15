@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Employe;
-import tn.esprit.spring.entities.User;
 import tn.esprit.spring.repository.EmployeRepository;
-import tn.esprit.spring.repository.EntrepriseRepository;
+
 
 @Service
 public class EmployeServiceImpl implements IEmployeService{
@@ -89,10 +89,14 @@ public class EmployeServiceImpl implements IEmployeService{
 
 	@Override
 	public Employe retrieveEmploye(String id) {
-		Employe empRet=null;
+		Employe empRet=new Employe();
+		Optional<Employe> empoptional;
 		try{
 			L.info("In Method retrieveEmploye: ");
-		empRet =  employeRepository.findById(Integer.parseInt(id)).get(); 
+			empoptional =  employeRepository.findById(Integer.parseInt(id)) ; 
+			if(empoptional.isPresent()){
+				empRet = empoptional.get();
+			}
 		L.info("Out of Method retrieveEmploye: ");
 		}
 		catch(Exception e){

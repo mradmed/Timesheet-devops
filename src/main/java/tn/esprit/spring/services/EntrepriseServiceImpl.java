@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,10 +72,16 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Override
 	public Entreprise retrieveEntreprise(String id) {
-		Entreprise empRet=null;
+		Entreprise empRet=new Entreprise();
+		Optional<Entreprise> empOp;
+		
 		try{
 			L.info("In Method retrieveEntreprise: ");
-		empRet =  entrepriseRepository.findById(Integer.parseInt(id)).get(); 
+			empOp =  entrepriseRepository.findById(Integer.parseInt(id)); 
+			if(empOp.isPresent()){
+				empRet = empOp.get();
+			}
+			
 		L.info("Out of Method retrieveEntreprise: ");
 		}
 		catch(Exception e){

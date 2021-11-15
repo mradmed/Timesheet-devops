@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +17,7 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	UserRepository userRepository;
 
-	// TODO Logger à ajouter  
+
 	private static final Logger L = LogManager.getLogger(UserServiceImpl.class);
 	
 	@Override
@@ -24,19 +25,15 @@ public class UserServiceImpl implements IUserService {
 		List<User> users = null; 
 		try {
 	
-			
-			// TODO Log à ajouter en début de la méthode 
+		
 			L.info("In Method retrieveAllUsers: ");
 			users = (List<User>) userRepository.findAll();  
 			for (User user : users) {
 				L.debug("Users in database :"+user.toString());
-				// TODO Log à ajouter pour affiher chaque user dans les logs   
 			} 
 			L.info("Out of  Method retrieveAllUsers with success: ");
-			// TODO Log à ajouter à la fin de la méthode 
 		}catch (Exception e) {
 			L.error("Error in retrieveAllUsers:"+e.getMessage());
-			// TODO Log à ajouter pour gérer les erreurs 
 		}
 
 		return users;
@@ -45,13 +42,11 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User addUser(User u) {
-		// TODO Log à ajouter en début de la méthode 
 		User u_saved =null;
 		try{
 		L.info("In Method addUser: ");
 		u_saved= userRepository.save(u); 
 		L.info("Out of Method addUser: ");
-		// TODO Log à ajouter à la fin de la méthode 
 		 }
 		catch(Exception e) {
 			L.error("Error in AddUser:"+e.getMessage());
@@ -64,9 +59,7 @@ public class UserServiceImpl implements IUserService {
 		User u_saved =null;
 		try{
 			L.info("In Method updateUser: ");
-		// TODO Log à ajouter en début de la méthode 
-		u_saved= userRepository.save(u); 
-		// TODO Log à ajouter à la fin de la méthode 
+			u_saved= userRepository.save(u); 
 		L.info("Out of Method updateUser: ");
 		}
 		catch(Exception e){
@@ -79,11 +72,10 @@ public class UserServiceImpl implements IUserService {
 	public void deleteUser(String id) {
 		try{
 			L.info("In Method deleteUser: ");
-		// TODO Log à ajouter en début de la méthode 
+
 		userRepository.deleteById(Long.parseLong(id)); 
 		L.info("Out of Method deleteUser: ");
-		
-		// TODO Log à ajouter à la fin de la méthode 
+
 		}
 		catch(Exception e){
 			L.error("Error in deleteUser :"+e.getMessage());
@@ -93,14 +85,17 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User retrieveUser(String id) {
-		User u=null;
+		User u=new User();
+		Optional<User> user;
 		try{
-		// TODO Log à ajouter en début de la méthode 
-		//User u =  userRepository.findById(Long.parseLong(id)).orElse(null);
+
 			L.info("In Method retrieveUser: ");
-		u =  userRepository.findById(Long.parseLong(id)).get(); 
+			user =  userRepository.findById(Long.parseLong(id)); 
+			if(user.isPresent()){
+				u = user.get();
+			}
 		L.info("Out of Method retrieveUser: ");
-		// TODO Log à ajouter à la fin de la méthode 
+
 		}
 		catch(Exception e){
 			L.error("Error in retrieveUser:"+e.getMessage());
