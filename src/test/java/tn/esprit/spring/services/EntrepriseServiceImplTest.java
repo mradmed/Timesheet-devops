@@ -10,6 +10,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 
 
@@ -22,9 +23,9 @@ public class EntrepriseServiceImplTest {
 	
 	@Test
 	@Order(1)
-	public void testRetrieveAllUsers(){
+	public void testRetrieveAllEntreprises(){
 		List<Entreprise> listUsers = es.retrieveAllEntreprise();
-		//Assertions.assertEquals(3,listUsers.size());
+		Assertions.assertEquals(1,listUsers.size());
 	}
 	
 	@Test
@@ -47,12 +48,22 @@ public class EntrepriseServiceImplTest {
 
 	}
 	
-//	@Test
-//	@Order(4)
-//	public void testDeleteEntreprise(){
-//		
-//		es.deleteEntreprise("7");
-//		Assertions.assertNull(es.retrieveEntreprise("7"));
-//	}
+	@Test
+	@Order(4)
+	public void testRetrieveEntreprise(){
+		Entreprise entRet= es.retrieveEntreprise("1");
+		Assertions.assertEquals(1,entRet.getId());
+	}
+	
+	
+	@Test
+	@Order(5)
+	public void testDeleteEntreprise(){
+		
+		es.deleteEntreprise("1");
+		Assertions.assertNull(es.retrieveEntreprise("1"));
+	}
+	
+	
 
 }

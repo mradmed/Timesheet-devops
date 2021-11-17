@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entities.Departement;
+import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.repository.DepartementRepository;
 
 @Service
@@ -82,21 +83,20 @@ public class DepartementServiceImpl implements IDepartementService {
 
 	@Override
 	public Departement retrieveDepartement(String id) {
-		Departement d=new Departement();
-		Optional<Departement> dep;
+		Departement depRet=null;
+		Optional<Departement> depoptional;
 		try{
 			L.info("In Method retrieveDepartement: ");
-			dep =  departementRepository.findById(Integer.parseInt(id)); 
-			if(dep.isPresent()){
-				d = dep.get();
+			depoptional =  departementRepository.findById(Integer.parseInt(id)) ; 
+			if(depoptional.isPresent()){
+				depRet = depoptional.get();
 			}
 		L.info("Out of Method retrieveDepartement: ");
-
 		}
 		catch(Exception e){
 			L.error("Error in retrieveDepartement:"+e.getMessage());
 		}
-		return d; 
+		return depRet; 
 	}
 
 }

@@ -28,7 +28,7 @@ public class DepartementServiceImplTest {
 	@Order(1)
 	public void testRetrieveAllDeps(){
 		List<Departement> listDep = ds.retrieveAllDepartements();
-		//Assertions.assertEquals(3,listDep.size());
+		Assertions.assertEquals(1,listDep.size());
 	}
 	
 	@Test
@@ -37,8 +37,6 @@ public class DepartementServiceImplTest {
 		
 		
 		Departement ent = new Departement("Info");
-		Entreprise e = es.retrieveEntreprise("1");
-		ent.setEntreprise(e);
 		Departement entAdded = ds.addDepartement(ent);
 		Assertions.assertEquals(ent.getName(),entAdded.getName());
 	}
@@ -48,6 +46,8 @@ public class DepartementServiceImplTest {
 	public void testUpdateDepartement() {
 		
 		Departement u = new Departement(1,"INFO Updated");
+		Entreprise e = es.retrieveEntreprise("1");
+		u.setEntreprise(e);
 		Departement depUpdated = ds.updateDepartement(u);
 		Assertions.assertEquals(u.getName(), depUpdated.getName());
 
@@ -60,12 +60,12 @@ public class DepartementServiceImplTest {
 		Assertions.assertEquals(1,depRet.getId());
 	}
 	
-//	@Test
-//	@Order(5)
-//	public void testDeleteDepartement(){
-//		
-//		ds.deleteDepartement("1");
-//		Assertions.assertNull(ds.retrieveDepartement("1"));
-//	}
-//	
+	@Test
+	@Order(5)
+	public void testDeleteDepartement(){
+		
+		ds.deleteDepartement("1");
+		//Assertions.assertNull(ds.retrieveDepartement("1"));
+	}
+	
 }

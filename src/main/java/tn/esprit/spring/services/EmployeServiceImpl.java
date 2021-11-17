@@ -89,7 +89,7 @@ public class EmployeServiceImpl implements IEmployeService{
 
 	@Override
 	public Employe retrieveEmploye(String id) {
-		Employe empRet=new Employe();
+		Employe empRet=null;
 		Optional<Employe> empoptional;
 		try{
 			L.info("In Method retrieveEmploye: ");

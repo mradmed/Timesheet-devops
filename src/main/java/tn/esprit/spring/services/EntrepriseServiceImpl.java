@@ -72,7 +72,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	@Override
 	public Entreprise retrieveEntreprise(String id) {
-		Entreprise empRet=new Entreprise();
+		Entreprise empRet=null;
 		Optional<Entreprise> empOp;
 		
 		try{

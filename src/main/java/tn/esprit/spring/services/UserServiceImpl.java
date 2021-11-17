@@ -85,7 +85,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User retrieveUser(String id) {
-		User u=new User();
+		User u=null;
 		Optional<User> user;
 		try{
 
